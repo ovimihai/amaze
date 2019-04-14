@@ -1,5 +1,5 @@
 //a few globals
-var dimensions = 35;
+var dimensions = 15;
 var pixels;
 var cells;
 var start;
@@ -65,7 +65,7 @@ var draw = function () {
 
   //draw the path
   if(path.length) {
-    context.strokeStyle = '#ffdddd';
+    context.strokeStyle = '#ff0000';
     context.lineCap = 'round';
     context.lineJoin = 'round';
     context.lineWidth = .2;
