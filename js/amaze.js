@@ -192,6 +192,10 @@ var onHover = function(e) {
     move((e.clientX / pixels * dimensions) | 0, (e.clientY / pixels * dimensions) | 0);
 }
 
+document.ontouchmove = function(event){
+    event.preventDefault();
+}
+
 //capture interaction
 var canvas = document.getElementById('maze');
 canvas.addEventListener('keypress', onKeyPress);
