@@ -1,23 +1,35 @@
 //a few globals
+var dimensions = 15;
 var pixels;
 var cells;
 var start;
 var end;
 var path;
+var levels = {'easy': 5, 'normal':15, 'medium': 20, 'hard': 30};
 
 function round(value) { return (value + 0.5) | 0; }
 
+function clear_drawing(){
+    var canvas = document.getElementById('maze');
+    var context = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight-20;
+
+    //fill
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    document.getElementById('menu').style.width = ( canvas.height - 5 ) + 'px';
+
+    return [canvas, context];
+}
+
 //show the maze
 var draw = function () {
-  var canvas = document.getElementById('maze');
-  var context = canvas.getContext('2d');
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  //fill
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = 'black';
-  context.fillRect(0, 0, canvas.width, canvas.height);
+  var drawing = clear_drawing();
+  var canvas = drawing[0];
+  var context = drawing[1];
 
   //draw the maze
   pixels = Math.min(canvas.width, canvas.height); 
@@ -92,8 +104,11 @@ var draw = function () {
   //did you win
   if(start[0] == end[0] && start[1] == end[1]) {
     alert('You Won!');
-    reset();
-  } 
+    var time = getRemainingTime();
+    if (time>0) {
+        reset();
+    }
+  }
 };
 
 //initialize a new maze
@@ -203,5 +218,6 @@ canvas.addEventListener("touchmove", onHover, false);
 canvas.addEventListener("mousemove", onHover, false);
 
 //capture screen updates
-window.onload = reset;
-window.onresize = draw;
+//window.onload = reset;
+window.onorientationchange = draw;
+//window.onresize = draw;

@@ -9,22 +9,40 @@
             margin: 0px;
             overflow: hidden;
             display: block;
+            background-color: black;
+            color: white;
         }
-
         body {
             position: fixed;
         }
+        #menu{
+            height: 20px;
+            line-height: 20px;
+            margin: 0 5px;
+        }
+        #level {
+            float: right;
+            margin: 0 5px;
+        }
     </style>
-    <script type="text/javascript">
-        var dimensions = 15;
-    </script>
-
 </head>
 <body>
 
-<canvas id='maze' tabindex=0>Your browser does not support the HTML5 canvas tag.</canvas>
-
+<div>
+    <div id="menu">
+        <span id="time"></span>
+        <select id="level" onchange="updateLevel();">
+            <option value="easy">---</option>
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
+    <canvas id='maze' tabindex=0>Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
 <script src='js/amaze.js'></script>
+<script src='js/controls.js'></script>
 
 </body>
 </html>
