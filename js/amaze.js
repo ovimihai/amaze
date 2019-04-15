@@ -177,15 +177,17 @@ function move(x, y) {
   //figure out which neighbor
   var neighbor = 0;
   try { neighbor = keyToNeighbor[x - start[0]][y -  start[1]]; } catch (e) { }
-  var mask = cells[start[0]][start[1]];
-  //is it a valid move
-  if(mask & neighbor) {
-    if(path.length && x == path[path.length - 1][0] && y == path[path.length - 1][1])
-      path.pop();
-    else
-      path.push(start);
-    start = [x, y];
-    draw();
+  if (typeof cells != 'undefined') {
+      var mask = cells[start[0]][start[1]];
+      //is it a valid move
+      if(mask & neighbor) {
+          if(path.length && x == path[path.length - 1][0] && y == path[path.length - 1][1])
+              path.pop();
+          else
+              path.push(start);
+          start = [x, y];
+          draw();
+      }
   }
 }
 
@@ -212,10 +214,14 @@ document.ontouchmove = function(event){
 
 //capture interaction
 var canvas = document.getElementById('maze');
-canvas.addEventListener('keypress', onKeyPress);
-canvas.addEventListener("touchstart", onHover, false);
-canvas.addEventListener("touchmove", onHover, false);
-canvas.addEventListener("mousemove", onHover, false);
+
+function addListeners(){
+    canvas.addEventListener('keypress', onKeyPress);
+    canvas.addEventListener("touchstart", onHover, {passive: true});
+    canvas.addEventListener("touchmove", onHover, {passive: true});
+    canvas.addEventListener("mousemove", onHover, false);
+}
+
 
 //capture screen updates
 //window.onload = reset;

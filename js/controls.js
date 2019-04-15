@@ -6,7 +6,7 @@ function setCookie(cname, cvalue, exminutes) {
 }
 
 function getCookie(cname, default_value) {
-    default_value = default_value | "";
+    var default_value = default_value | "";
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
@@ -28,7 +28,7 @@ var update_timer;
 var reset_code = [];
 
 function getRemainingTime() {
-    var current_time = Math.trunc(new Date().getTime() / 1000);
+    var current_time = Math.floor(new Date().getTime() / 1000);
     var timer = getCookie('timer', 0);
     if (timer == 0) {
         setCookie('timer', current_time, expire_minutes);
@@ -41,6 +41,7 @@ function getRemainingTime() {
 }
 
 function start() {
+    addListeners();
     var remaining_time = getRemainingTime();
     if (remaining_time < 0) {
         clear_drawing();
@@ -57,9 +58,9 @@ function showTimer() {
         document.getElementById('time').innerHTML = '00:00';
         return;
     }
-    var min = Math.trunc(time / 60);
+    var min = Math.floor(time / 60);
     var sec = time - min * 60;
-    var str_time = min.toString() + ':' + sec.toString().padStart(2, '0');
+    var str_time = min.toString() + ':' + String("0" + sec).slice(-2) ;
     document.getElementById('time').innerHTML = str_time;
 }
 
@@ -83,7 +84,7 @@ function updateLevel() {
 
 
 function resetTimer() {
-    var time = Math.trunc(new Date().getTime() / 1000);
+    var time = Math.floor(new Date().getTime() / 1000);
     setCookie('timer', time, expire_minutes);
 }
 
