@@ -1,8 +1,7 @@
 Amaze
 -----
 
-There's not much to say, this is a small project I made for my 4 year old who really has a thing for mazes. It uses the HTML5 Canvas feature to draw the game board. The method of maze generation is simple randomized Prims.
+This a project that I forked from [https://github.com/kevinkreiser/amaze](https://github.com/kevinkreiser/amaze) for my kid.
+He started a simple maze generator and I added some basic features like timer and levels.
 
-I'd like to make a few controls to tweak a few things on the fly but this was good enough to get going.
-
-Give it a try [http://kevinkreiser.github.io/amaze](http://kevinkreiser.github.io/amaze)
+The static page can be found here [http://ovimihai.github.io/amaze](http://ovimihai.github.io/amaze)
